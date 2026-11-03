@@ -1,25 +1,49 @@
 #include <stdio.h>
-int check(char a[100])
-{
-    static int i = 0;
-    if (i < strlen(a) / 2)
-    {
-        if (a[i] != a[strlen(a) - 1 - i])
-        {
-            printf("no");
-            return 0;
-        }
-        i++;
-        return check(a);
-    }
-    else
-        printf("yes");
-    return 0;
-}
+#include <string.h>
+
 int main()
 {
-    char a[100];
-    fgets(a, sizeof(a), stdin);
-    a[strcspn(a, "\n")] = '\0';
-    check(a);
+    int n;
+
+    printf("Enter the number of strings (n): ");
+    scanf("%d", &n);
+
+    getchar();
+
+    char strs[n][100];
+    printf("Enter %d strings:\n", n);
+
+    for (int i = 0; i < n; i++)
+    {
+        fgets(strs[i], sizeof(strs[i]), stdin);
+
+        strs[i][strcspn(strs[i], "\n")] = '\0';
+    }
+    int first_str_len = strlen(strs[0]);
+    for (int i = 0; i < first_str_len; i++)
+    {
+        char char_to_check = strs[0][i];
+        int all_match = 1;
+
+        for (int j = 1; j < n; j++)
+        {
+            if (i >= strlen(strs[j]) || strs[j][i] != char_to_check)
+            {
+                all_match = 0;
+                break;
+            }
+        }
+
+        if (all_match)
+        {
+            printf("%c", char_to_check);
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    printf("\n");
+    return 0;
 }

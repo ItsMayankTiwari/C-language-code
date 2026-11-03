@@ -1,18 +1,23 @@
 #include<stdio.h>
+#include<string.h>
 
-int sumofdigits(int n){
-    if (n == 0)
-    return 0;
-    int m = n % 10;
-    n = n / 10;
-    return m + sumofdigits(n);
-}
+void main(){
+    char s[100];
+    printf("s = ");
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
 
-int main(){
-    int n;
-    scanf("%d", &n);
+    int m = 0;
 
-    printf("%d", sumofdigits(n));
-
-    return 0;
+    for(int i = 0; s[i] == '(' || s[i] == ')'; i++){
+        if(s[i] == '('){
+            if(m>0)
+            printf("(");
+            m++;
+        } else if(s[i] == ')'){
+            m--;
+            if (m>0)
+            printf(")");
+        }
+    }
 }

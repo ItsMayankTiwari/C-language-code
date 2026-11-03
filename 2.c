@@ -1,14 +1,18 @@
-gi#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h> // Required for atoi()
 
-int euclidiangcd(int a, int b){
-    if(b == 0)
-    return a;
-    else return euclidiangcd(b, a % b);
-}
+int main() {
+    char myString[] = "12345\n"; // A string, maybe from fgets
+    int num;
 
-int main(){
-    int a, b;
-    scanf("%d %d", &a, &b);
+    // Convert the string to an integer
+    num = atoi(myString);
 
-    printf("%d", euclidiangcd(a, b));
+    printf("The string was \"%s\"", myString);
+    printf("The integer is %d\n", num);
+
+    // You can now do math with it
+    printf("The integer plus 10 is %d\n", num + 10);
+
+    return 0;
 }

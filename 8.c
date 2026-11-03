@@ -1,17 +1,31 @@
-#include<Stdio.h>
-
-int power(int a, int b){
-    if(b == 0){
-        return 1;
-    }
-    else
-    return a * power(a, b - 1);
-}
+#include <stdio.h>
+#include <string.h>
 
 int main()
 {
-    int a, b;
-    scanf("%d %d", &a, &b);
+    char s[100], t[100];
+    printf("s = ");
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
 
-    printf("%d", power(a, b));
+    int m[256] = {0};
+
+    for (int i = 0; i < strlen(s); i++)
+    {
+        m[s[i]]++;
+    }
+    
+    for (int j = strlen(s); j > 0; j--)
+    {
+        for (int i = 0; i < 256; i++)
+        {
+            if (m[i] == j)
+            {
+                for (int k = 0; k < j; k++)
+                {
+                    printf("%c", i);
+                }
+            }
+        }
+    }
 }

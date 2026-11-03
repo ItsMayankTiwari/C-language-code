@@ -1,22 +1,26 @@
-#include<Stdio.h>
+#include<stdio.h>
 #include<string.h>
 
-int newstrlen(char *s){
-    static int count, i = 0;
-    while(s[i] != 0){
-        count++;
-        i++;
-        return newstrlen(s);
+void main(){
+    char s[100];
+    printf("s = ");
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+
+    int m = 0;
+    int max = 0;
+
+    for(int i = 0; s[i] != '\0'; i++){
+        if(s[i] == '('){
+            m++;
+        } else if(s[i] == ')'){
+            m--;
+        }
+
+        if (m > max){
+            max = m;
+        }
     }
 
-    return count;
-}
-
-int main()
-{
-    char str[100];
-    fgets(str, sizeof(str),stdin);
-    str[strcspn(str, "\n")] = '\0';
-
-    printf("%d", newstrlen(str));
+    printf("%d", max);
 }
